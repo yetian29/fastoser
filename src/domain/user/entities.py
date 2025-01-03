@@ -1,9 +1,12 @@
 
 
+from src.domain.base.entities import BaseEntity
+from src.domain.user.value_objects import UserEmail, UserName, UserPassword
+
+
 @dataclass
-class User:
-    oid: UUID
-    username: str
-    email: str
-    password: str 
-    is_active: bool
+class User(BaseEntity[UserOID, UserCreatedAt]):
+    username: UserName
+    email: UserEmail
+    password: UserPassword
+    is_active: bool = False
