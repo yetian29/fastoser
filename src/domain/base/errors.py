@@ -1,2 +1,0 @@
-class BaseDomainException(Exception):
-    pass
