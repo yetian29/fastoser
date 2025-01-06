@@ -1,5 +1,3 @@
-
-
 from src.domain.base.entities import BaseEntity
 from src.domain.user.value_objects import UserEmail, UserName, UserPassword
 
