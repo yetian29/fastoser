@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 
+from src.core.config.settings import settings
 from src.domain.user.entities import User
 from src.domain.user.services import ILoginService, IPasswordService, IUserService
 
@@ -21,7 +22,7 @@ class LoginService(ILoginService):
         user: User, expires_delta: timedelta | None = None
     ) -> str:
         if expires_delta:
-            expire = datetime.now() + timedelta(expires_delta)
+            expire = datetime.now() + expires_delta
         else:
             expire = datetime.now() + timedelta(minutes=15)
         data = {"sub": user.oid, "exp": expire}
@@ -35,4 +36,16 @@ class LoginService(ILoginService):
 
 
 class UserService(IUserService):
-    pass
+    async def get_user_by_username_or_email(
+        username: str | None = None, email: str | None = None
+    ) -> User:
+        pass
+
+    async def get_user_by_email(email: str) -> User:
+        pass
+
+    async def create_user(self, user: User) -> User:
+        pass
+
+    async def update_user(self, user: User) -> User:
+        pass

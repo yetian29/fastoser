@@ -1,5 +1,12 @@
 from src.domain.base.entities import BaseEntity
-from src.domain.user.value_objects import UserEmail, UserName, UserPassword
+from src.domain.user.value_objects import (
+    UserCreatedAt,
+    UserEmail,
+    UserName,
+    UserOID,
+    UserPassword,
+)
+from dataclasses import dataclass
 
 
 @dataclass
