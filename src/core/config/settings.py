@@ -1,6 +1,6 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from functools import lru_cache
-from pydatic import BaseModel
+from pydatic import BaseModel, PostgresDsn
 
 
 @lru_cache
@@ -13,11 +13,11 @@ class Database(BaseModel):
     password: str
     host: str
     port: str
-    db: str
+    name: str
 
     @property
     def pg_dsn(self) -> PostgresDsn:
-        return f"postgres://{self.username}:{self.password}@{self.host}:{self.port}/{self.db}"
+        return f"postgres://{self.username}:{self.password}@{self.host}:{self.port}/{self.name}"
 
 
 class Settings(BaseSettings):
@@ -25,7 +25,9 @@ class Settings(BaseSettings):
     algorithm: str = "HS256"
     database: Database
 
-    model_config = SettingsConfigDict(env_file=".env", env_nested_delimiter="__")
+    model_config = SettingsConfigDict(
+        env_file=".env", env_nested_delimiter="__", env_ignore_empty=True
+    )
 
 
 settings = get_settings()
