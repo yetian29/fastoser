@@ -27,7 +27,7 @@ class LoginService(ILoginService):
             expire = datetime.now() + timedelta(minutes=15)
         data = {"sub": user.oid, "exp": expire}
         encodted_jwt = jwt.encode(
-            data, settings.SECRET_KEY, algorithm=settings.ALGORITHM
+            data, settings.secret_key, algorithm=settings.algorithm
         )
         return encodted_jwt
 
