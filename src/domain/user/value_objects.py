@@ -1,7 +1,8 @@
 from dataclasses import dataclass
-from src.domain.base.value_objects import BaseValueObject
-from uuid import UUID
 from datetime import datetime
+from uuid import UUID
+
+from src.domain.base.value_objects import BaseValueObject
 
 
 @dataclass(frozen=True)

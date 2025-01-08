@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-
 from typing import Generic, TypeVar
 
 from src.domain.base.value_objects import BaseValueObject

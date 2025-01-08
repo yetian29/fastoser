@@ -1,7 +1,13 @@
 from dataclasses import dataclass
-from src.domain.user.commands import RegisterUserCommand
+
+from src.domain.user.commands import LoginUserCommand, RegisterUserCommand
 from src.domain.user.entities import User
+from src.domain.user.errors import (
+    PasswordIncorrectException,
+    UserHasBeenRegistedException,
+)
 from src.domain.user.services import ILoginService, IPasswordService, IUserService
+from src.helper.errors import fail
 
 
 @dataclass(frozen=True)
@@ -11,7 +17,7 @@ class RegisterUserUseCase:
     async def execute(self, command: RegisterUserCommand) -> User:
         if await self.user_service.get_user_by_email(email=command.user.email):
             fail(UserHasBeenRegistedException)
-        return await self.user_service.create_user(user)
+        return await self.user_service.create_user(user=command.user)
 
 
 @dataclass(frozen=True)
@@ -30,5 +36,5 @@ class LoginUserUseCase:
             fail(PasswordIncorrectException)
         access_token = self.login_service.generate_acess_token(user)
         self.login_service.is_active_account(user)
-        await user_service.update(user)
+        await self.user_service.update(user)
         return access_token

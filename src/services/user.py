@@ -1,11 +1,11 @@
 from datetime import datetime, timedelta
 
+import jwt
+from passlib.context import CryptContext
+
 from src.core.config.settings import settings
 from src.domain.user.entities import User
 from src.domain.user.services import ILoginService, IPasswordService, IUserService
-
-import jwt
-
 
 
 class PasswordService(IPasswordService):

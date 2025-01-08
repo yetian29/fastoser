@@ -1,3 +1,5 @@
+from dataclasses import dataclass
+
 from src.domain.base.entities import BaseEntity
 from src.domain.user.value_objects import (
     UserCreatedAt,
@@ -6,7 +8,6 @@ from src.domain.user.value_objects import (
     UserOID,
     UserPassword,
 )
-from dataclasses import dataclass
 
 
 @dataclass
