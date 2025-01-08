@@ -6,15 +6,17 @@ from src.domain.user.services import ILoginService, IPasswordService, IUserServi
 
 import jwt
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 class PasswordService(IPasswordService):
+    def __init__(self) -> None:
+        self.pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
     def get_password_hash(self, plain_password: str) -> str:
-        return pwd_context.hash(plain_password)
+        return self.pwd_context.hash(plain_password)
 
     def verify_password(self, plain_password: str, hashed_password: str) -> True:
-        return pwd_content.verify(plain_password, hashed_password)
+        return self.pwd_content.verify(plain_password, hashed_password)
 
 
 class LoginService(ILoginService):
