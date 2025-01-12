@@ -18,7 +18,7 @@ class Database(BaseModel):
 
     @property
     def pg_dsn(self) -> PostgresDsn:
-        return f"postgres://{self.username}:{self.password}@{self.host}:{self.port}/{self.name}"
+        return f"postgres+psycopg2://{self.username}:{self.password}@{self.host}:{self.port}/{self.name}"
 
 
 class Settings(BaseSettings):
