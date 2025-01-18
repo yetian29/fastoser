@@ -1,12 +1,13 @@
+from enum import Enum
 from functools import lru_cache
 
 from pydantic import BaseModel, PostgresDsn
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
-@lru_cache
-def get_settings():
-    return Settings()
+class Environment(str, Enum):
+    DEV = "development"
+    PRODUCT = "product"
 
 
 class Database(BaseModel):
@@ -25,10 +26,16 @@ class Settings(BaseSettings):
     secret_key: str
     algorithm: str = "HS256"
     database: Database
+    environment: Environment = Environment.DEV
 
     model_config = SettingsConfigDict(
         env_file=".env", env_nested_delimiter="__", env_ignore_empty=True
     )
+
+
+@lru_cache
+def get_settings():
+    return Settings()
 
 
 settings = get_settings()
