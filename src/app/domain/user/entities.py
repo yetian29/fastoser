@@ -1,6 +1,7 @@
-
 from dataclasses import dataclass
+
 from src.app.domain.base.entities import BaseEntity
+
 
 @dataclass
 class User(BaseEntity):

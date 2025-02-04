@@ -1,5 +1,3 @@
-
-
 from abc import ABC, abstractmethod
 
 from src.app.domain.user.entities import User
@@ -10,4 +8,3 @@ class IUserDto(ABC):
     @abstractmethod
     def from_entity(entity: User) -> "UserORM":
         pass
-        
