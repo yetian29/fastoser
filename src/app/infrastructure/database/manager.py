@@ -5,7 +5,12 @@ from src.app.infrastructure.config.settings import DatabaseModel
 
 class DatabaseManager:
     def __init__(self, config: DatabaseModel) -> None:
-        self._async_engine = create_async_engine(url=config.dsn)
+        self._async_engine = create_async_engine(
+            url=str(config.dsn),
+            pool_pre_ping=True,
+            pool_recycle=3600
+            
+            )
         self._async_session = async_sessionmaker(
             bind=self._async_engine, expire_on_commit=False
         )
