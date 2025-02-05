@@ -1,5 +1,6 @@
 import re
 
+from pydantic import field_validator
 from pydantic.dataclasses import dataclass
 
 from src.app.domain.base.value_object import BaseValueObject
@@ -30,7 +31,8 @@ class UserName(BaseValueObject):
 class UserEmail(BaseValueObject):
     value: str
 
-    def validate(self) -> None:
+    @field_validator("value", mode="after")
+    def validate_email(self):
         # Regular expression for email validation
         # This pattern validates:
         # - Local part can contain letters, numbers, and certain special characters
@@ -42,6 +44,6 @@ class UserEmail(BaseValueObject):
             raise DomainValidationException(
                 "UserEmail invalid. UserEmail has to be formatted same as 'example@gmail.com'"
             )
+        return self.value
 
-    def __post_init__(self) -> None:
-        self.validate()
+  
