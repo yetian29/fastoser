@@ -8,11 +8,12 @@ from src.app.domain.user.entity import User
 from src.app.domain.user.exception import DomainValidationException
 
 
-class BaseValidation(BaseModel):
-    username: str | None = None
-    email: str | None = None
+class UserRegisterInSchema(BaseModel):
+    username: str
+    email: str
+    password: str
 
-    @field_validator("email", mode="after")
+    @field_validator("username", mode="after")
     @classmethod
     def validate_username(cls, value):
         if not value:
@@ -44,10 +45,6 @@ class BaseValidation(BaseModel):
                 "UserEmail invalid. UserEmail has to be formatted same as 'example@gmail.com'"
             )
         return value
-
-
-class UserInSchema(BaseValidation):
-    password: str
 
     @property
     def hash_password(self, plain_password: str) -> str:
