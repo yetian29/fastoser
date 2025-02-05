@@ -7,11 +7,17 @@ from pydantic import BaseModel, field_validator
 from src.app.domain.user.entity import User
 from src.app.domain.user.exception import DomainValidationException
 
+   
 
 class UserRegisterInSchema(BaseModel):
     username: str
     email: str
     password: str
+    
+    @property
+    def hash_password(self, plain_password: str) -> str:
+        pass
+
 
     @field_validator("username", mode="after")
     @classmethod
@@ -46,10 +52,8 @@ class UserRegisterInSchema(BaseModel):
             )
         return value
 
-    @property
-    def hash_password(self, plain_password: str) -> str:
-        pass
 
+   
     def to_entity(
         self,
         oid: UUID = uuid4(),
