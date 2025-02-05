@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from src.app.domain.user.entities import User
+from src.app.domain.user.entity import User
 from src.app.infrastructure.database.models.user import UserORM
 
 
