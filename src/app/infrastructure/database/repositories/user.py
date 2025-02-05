@@ -12,31 +12,31 @@ class UserRepository(IUserRepository):
         self._async_session = async_session
 
     async def get_user_by_username(self, username: str) -> UserORM | None:
-            stmt = select(UserORM).where(UserORM.username == username)
-            return await self._async_session.scalar(stmt)
+        stmt = select(UserORM).where(UserORM.username == username)
+        return await self._async_session.scalar(stmt)
 
     async def get_user_by_email(self, email: str) -> UserORM | None:
-            stmt = select(UserORM).where(UserORM.email == email)
-            return await self._async_session.scalar(stmt)
+        stmt = select(UserORM).where(UserORM.email == email)
+        return await self._async_session.scalar(stmt)
 
     async def get_user_by_oid(self, oid: UUID) -> UserORM | None:
-            stmt = select(UserORM).where(UserORM.oid == oid)
-            return await self._async_session.scalar(stmt)
+        stmt = select(UserORM).where(UserORM.oid == oid)
+        return await self._async_session.scalar(stmt)
 
     async def create_user(self, user_orm: UserORM) -> UserORM:
-            self._async_session.add(user_orm)
-            await self._async_session.refresh(user_orm)
-            return user_orm
+        self._async_session.add(user_orm)
+        await self._async_session.refresh(user_orm)
+        return user_orm
 
     async def update_user(self, user_orm: UserORM) -> UserORM:
-            self._async_session.add(user_orm)
-            await self._async_session.refresh(user_orm)
-            return user_orm
+        self._async_session.add(user_orm)
+        await self._async_session.refresh(user_orm)
+        return user_orm
 
     async def delete_user(self, oid: UUID) -> UserORM | None:
-            stmt = select(UserORM).where(UserORM.oid == oid)
-            user = await self._async_session.scalar(stmt)
-            if not user:
-                return None
-            await self._async_session.delete(user)
-            return user
+        stmt = select(UserORM).where(UserORM.oid == oid)
+        user = await self._async_session.scalar(stmt)
+        if not user:
+            return None
+        await self._async_session.delete(user)
+        return user

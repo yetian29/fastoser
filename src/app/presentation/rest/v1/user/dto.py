@@ -1,9 +1,9 @@
-from abc import ABC, abstractmethod
 from datetime import datetime
 from uuid import UUID, uuid4
 
 from passlib.context import CryptContext
 
+from src.app.domain.user.dto import IUserDTO1
 from src.app.domain.user.entity import User
 from src.app.presentation.rest.v1.user.schemas import (
     UserRegisterInSchema,
@@ -13,18 +13,7 @@ from src.app.presentation.rest.v1.user.schemas import (
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
-class IUserDto(ABC):
-    @abstractmethod
-    def to_entity(self, schema_in: UserRegisterInSchema) -> User:
-        pass
-
-    @staticmethod
-    @abstractmethod
-    def from_entity(entity: User) -> "UserRegisterOutSchema":
-        pass
-
-
-class UserDto(IUserDto):
+class UserDto(IUserDTO1):
     def get_password_hash(self, plain_password: str) -> str:
         return pwd_context.hash(plain_password)
 

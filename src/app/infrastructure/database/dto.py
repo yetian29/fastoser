@@ -1,9 +1,9 @@
-from src.app.domain.user.dto import IUserDto
+from src.app.domain.user.dto import IUserDTO2
 from src.app.domain.user.entity import User
 from src.app.infrastructure.database.models.user import UserORM
 
 
-class UserDto(IUserDto):
+class UserDto(IUserDTO2):
     def from_entity(entity: User) -> "UserORM":
         return UserORM(
             oid=entity.oid,
