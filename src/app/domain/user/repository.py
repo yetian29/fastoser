@@ -6,15 +6,15 @@ from src.app.infrastructure.database.models.user import UserORM
 
 class IUserRepository(ABC):
     @abstractmethod
-    async def get_user_by_username(self, username: str) -> UserORM:
+    async def get_user_by_username(self, username: str) -> UserORM | None:
         pass
 
     @abstractmethod
-    async def get_user_by_email(self, email: str) -> UserORM:
+    async def get_user_by_email(self, email: str) -> UserORM | None:
         pass
 
     @abstractmethod
-    async def get_user_by_oid(self, oid: UUID) -> UserORM:
+    async def get_user_by_oid(self, oid: UUID) -> UserORM | None:
         pass
 
     @abstractmethod
@@ -26,5 +26,5 @@ class IUserRepository(ABC):
         pass
 
     @abstractmethod
-    async def delete_user(self, oid: UUID) -> UserORM:
+    async def delete_user(self, oid: UUID) -> UserORM | None:
         pass

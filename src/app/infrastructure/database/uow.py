@@ -1,6 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 
 from src.app.domain.base.uow import IUnitOfWork
+from src.app.infrastructure.database.repositories.user import UserRepository
 
 
 class Uow(IUnitOfWork):
@@ -14,6 +15,7 @@ class Uow(IUnitOfWork):
 
     async def __aenter__(self):
         self._async_session = self._async_session_factory()
+        self.user = UserRepository(self._async_session)
         return await super().__aenter__()
 
     async def commit(self) -> None:

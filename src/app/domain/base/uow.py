@@ -1,8 +1,12 @@
 from abc import ABC, abstractmethod
 from typing import Self
 
+from src.app.domain.user.repository import IUserRepository
+
 
 class IUnitOfWork(ABC):
+    user: IUserRepository
+
     async def __aenter__(self) -> Self:
         return self
 
