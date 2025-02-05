@@ -6,7 +6,7 @@ from src.app.domain.user.value_object import UserEmail, UserName
 
 @dataclass
 class User(BaseEntity):
-    username: UserName | None
-    email: UserEmail | None
+    username: UserName
+    email: UserEmail
     password: str
     is_active: bool
