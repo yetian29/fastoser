@@ -13,7 +13,7 @@ class Uow(IUnitOfWork):
     def __init__(self, async_session_factory: async_sessionmaker[AsyncSession]) -> None:
         self._async_session_factory = async_session_factory
 
-    async def __aenter__(self):
+    async def __aenter__(self) -> IUnitOfWork:
         self._async_session = self._async_session_factory()
         self.user = UserRepository(self._async_session)
         return await super().__aenter__()
