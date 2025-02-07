@@ -16,7 +16,7 @@ class IUserDTO1(ABC):
 
     @staticmethod
     @abstractmethod
-    def from_entity(entity: User) -> "UserRegisterOutSchema":
+    def from_entity(entity: User) -> UserRegisterOutSchema:
         pass
 
 
@@ -24,7 +24,7 @@ class IUserDTO1(ABC):
 class IUserDTO2(ABC):
     @staticmethod
     @abstractmethod
-    def from_entity(entity: User) -> "UserORM":
+    def from_entity(entity: User) -> UserORM:
         pass
 
     @abstractmethod

@@ -35,7 +35,7 @@ class UserDto(IUserDTO1):
             password=self.get_password_hash(schema_in.password),
         )
 
-    def from_entity(entity: User) -> "UserRegisterOutSchema":
+    def from_entity(entity: User) -> UserRegisterOutSchema:
         return UserRegisterOutSchema(
             oid=entity.oid,
             username=entity.username,

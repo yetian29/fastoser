@@ -4,7 +4,7 @@ from src.app.infrastructure.database.models.user import UserORM
 
 
 class UserDto(IUserDTO2):
-    def from_entity(entity: User) -> "UserORM":
+    def from_entity(entity: User) -> UserORM:
         return UserORM(
             oid=entity.oid,
             username=entity.username,

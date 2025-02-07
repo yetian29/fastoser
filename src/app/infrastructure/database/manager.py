@@ -15,3 +15,7 @@ class DatabaseManager:
     @property
     def async_session_factory(self) -> async_sessionmaker[AsyncSession]:
         return self._async_session
+
+    @property
+    def shutdown(self) -> None:
+        self._async_engine.dispose()
