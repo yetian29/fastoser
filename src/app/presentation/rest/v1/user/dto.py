@@ -1,21 +1,18 @@
 from datetime import datetime
 from uuid import UUID, uuid4
 
-from passlib.context import CryptContext
-
 from src.app.domain.user.dto import IUserDTO1
 from src.app.domain.user.entity import User
+from src.app.infrastructure.config.settings import settings
 from src.app.presentation.rest.v1.user.schemas import (
     UserRegisterInSchema,
     UserRegisterOutSchema,
 )
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
 
 class UserDto(IUserDTO1):
     def get_password_hash(self, plain_password: str) -> str:
-        return pwd_context.hash(plain_password)
+        return settings.pwd_context.hash(plain_password)
 
     def to_entity(
         self,
