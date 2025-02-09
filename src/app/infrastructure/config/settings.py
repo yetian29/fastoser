@@ -8,7 +8,9 @@ class DatabaseModel(BaseModel):
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env", env_nested_delimiter="__")
+    model_config = SettingsConfigDict(
+        env_file="example.env", env_nested_delimiter="__", env_ignore_empty=True
+    )
     database: DatabaseModel
     pwd_context: CryptContext = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
