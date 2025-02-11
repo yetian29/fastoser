@@ -4,7 +4,15 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class DatabaseModel(BaseModel):
-    dsn: PostgresDsn
+    host: str
+    username: str
+    password: str
+    port: int
+    name: str
+
+    @property
+    def dsn(self) -> PostgresDsn:
+        return f"postgresql+asyncpg://{self.user}:{self.password}@{self.host}:{self.port}/{self.name}"
 
 
 class Settings(BaseSettings):
