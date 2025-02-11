@@ -19,7 +19,7 @@ RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
 FROM python:3.12-slim-bullseye as dev
 
 # Set the working directory
-WORKDIR /src
+WORKDIR /fastoser
 
 # Copy requirements.txt from builder stage
 COPY --from=builder /tmp/requirements.txt requirements.txt
@@ -28,16 +28,14 @@ COPY --from=builder /tmp/requirements.txt requirements.txt
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
 # Copy the source code and entrypoint script into the container
-COPY ./src/ /src/
-COPY ./entrypoint.sh entrypoint.sh
-COPY ./example.env example.env
-COPY ./Makefile  Makefile
-
-
-
+COPY ./src/ /fastoser/src
+COPY ./entrypoint.sh /fastoser/entrypoint.sh
+COPY ./example.env /fastoser/example.env
+COPY ./Makefile  /fastoser/Makefile
 
 # Make the entrypoint script executable
-RUN chmod +x entrypoint.sh
+RUN chmod +x /fastoser/entrypoint.sh
 
 # Define the entrypoint
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["/fastoser/entrypoint.sh"]
+

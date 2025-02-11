@@ -3,7 +3,7 @@ from fastapi import FastAPI
 
 
 def init_app():
-    app = FastAPI(title="Fastoser")
+    app = FastAPI(debug=True, title="Fastoser")
     return app
 
 

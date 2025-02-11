@@ -1,22 +1,18 @@
 
 services:
-  main-app:
+  main_app:
+    container_name: main_app
     build:
-      context: ..
-      dockerfile: Dockerfile
-    container_name: main-app
-    ports: 
-      - "8000:8000"
-    command: "sh web.entrypoint.sh"
-    env_file:
-      - ../example.env
+        context: ..
+        dockerfile: Dockerfile
     volumes:
-      - ../src/:/src
-    depends_on:
-      - postgres
+      - ../src/:/fastoser/src/
+    ports: 
+        - "8000:8000"
+    command: "sh /fastoser/entrypoint.sh" 
     networks:
       - backend
 
-networks:
+networks: 
   backend:
     driver: bridge
