@@ -1,7 +1,6 @@
 import uvicorn
 from fastapi import FastAPI
-
-from src.app.presentation.rest.v1.router import router as rest_router
+from presentation.rest.v1.router import router as rest_router
 
 
 def init_app() -> FastAPI:

@@ -1,6 +1,5 @@
 from fastapi import APIRouter
-
-from src.app.presentation.rest.v1.user.views import router as user_router
+from presentation.rest.v1.user.views import router as user_router
 
 router = APIRouter()
 
