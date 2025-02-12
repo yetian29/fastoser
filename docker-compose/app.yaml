@@ -10,6 +10,8 @@ services:
     ports: 
         - "8000:8000"
     command: "sh /fastoser/entrypoint.sh" 
+    depends_on:
+      - postgres
     networks:
       - backend
 

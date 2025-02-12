@@ -7,7 +7,7 @@ from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from src.app.infrastructure.config.settings import settings
-from src.app.infrastructure.database.models import *  # noqa
+from src.app.infrastructure.database.models import *  # noqa  F403
 from src.app.infrastructure.database.models.base import BaseORM
 
 # this is the Alembic Config object, which provides
@@ -19,7 +19,7 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-config.set_main_option("sqlalchemy.url", str(settings.database.dsn))
+config.set_main_option("sqlalchemy.url", settings.database.postgres_url)
 
 # add your model's MetaData object here
 # for 'autogenerate' support

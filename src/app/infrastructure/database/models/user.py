@@ -6,6 +6,7 @@ from src.app.infrastructure.database.models.mixin import TimeStampMixin, UUIDOid
 
 
 class UserORM(BaseORM, UUIDOidMixin, TimeStampMixin):
+    __tablename__ = "user"
     username: Mapped[str] = mapped_column(String(32), unique=True)
     email: Mapped[str] = mapped_column(unique=True)
     password: Mapped[str]

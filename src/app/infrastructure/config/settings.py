@@ -1,5 +1,5 @@
 from passlib.context import CryptContext
-from pydantic import BaseModel, PostgresDsn
+from pydantic import BaseModel
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -11,8 +11,8 @@ class DatabaseModel(BaseModel):
     name: str
 
     @property
-    def dsn(self) -> PostgresDsn:
-        return f"postgresql+asyncpg://{self.user}:{self.password}@{self.host}:{self.port}/{self.name}"
+    def postgres_url(self) -> str:
+        return f"postgresql+asyncpg://{self.username}:{self.password}@{self.host}:{self.port}/{self.name}"
 
 
 class Settings(BaseSettings):
