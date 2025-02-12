@@ -23,6 +23,8 @@ help:
 up_app:
 	docker-compose --env-file example.env -f ${APP_FILE} -f ${STORAGE_FILE} up --build
 
+down_app:
+	docker-compose --env-file example.env -f ${APP_FILE} -f ${STORAGE_FILE} down
 
 migration:
 	alembic revision --autogenerate -m "initial migration"
